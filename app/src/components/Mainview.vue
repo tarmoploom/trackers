@@ -58,12 +58,12 @@ const Submit = async () => {
     router.currentRoute.value.query.id !== '' &&
     router.currentRoute.value.query.tenant !== ''
   ) {
-    axios.defaults.params = { tenant: router.currentRoute.value.query.tenant };
     url =
       'https://itb2204.bc365.eu:7048/bc/api/trackers/tracking/v2.0/' +
       'companies(c44491e1-219e-ed11-9889-000d3a2a9069)/salesOrders(' +
       router.currentRoute.value.query.id +
       ')/';
+    axios.defaults.params = { tenant: router.currentRoute.value.query.tenant };
 
     await axios
       .get(url)
@@ -84,7 +84,6 @@ const Submit = async () => {
   }
 
   addOrder({ ...order.value });
-
   order.value.salesOrderNo = undefined;
   order.value.customerName = '';
   order.value.orderOfDate = undefined;
