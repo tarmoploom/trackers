@@ -1,12 +1,12 @@
 # trackers
 
-:: main - for build
+:: main - for build only \
 :: dev - for development \
 \
 :: Installi NodeJS LTS versiooni: https://nodejs.org/en/download/. \
 :: Installi pnpm käsuga: npm install -g pnpm <- kui veel pole \
 \
-:: esimene kord \
+:: first-run: \
 :: cd app \
 :: pnpm install \
 :: pnpm install -g @vue/cli \
@@ -20,6 +20,6 @@
 :: pnpm i -D vite-plugin-windicss windicss \
 :: restart VSCode \
 \
-:: kohalik käivitus \
+:: local run: \
 :: cd app \
-:: pnpm run dev \
+:: pnpm run dev
