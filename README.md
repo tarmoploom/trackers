@@ -1,2 +1,5 @@
-# trackers-test1
-for test build
+# trackers
+
+main - for build
+
+dev - for development
