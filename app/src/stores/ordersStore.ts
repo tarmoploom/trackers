@@ -11,3 +11,6 @@ export const useOrdersStore = defineStore('ordersStore', () => {
 
   return { orders: orders, addOrder: addOrder };
 });
+
+export const usr = 'taploo';
+export const auth = 'so2VJB9nU301wRYEvtw1ocsv2hEZUoON6PQHuT5r5EQ=';

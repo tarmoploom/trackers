@@ -1,13 +1,13 @@
 import Axios from 'axios';
+import { usr, auth } from '@/stores/ordersStore';
 
 export function AxiosCreate() {
   const axios = Axios.create();
 
-  axios.defaults.headers.common['Authorization'] =
-    'Basic so2VJB9nU301wRYEvtw1ocsv2hEZUoON6PQHuT5r5EQ=';
+  axios.defaults.headers.common['Authorization'] = 'Basic ' + auth;
   axios.defaults.auth = {
-    username: 'taploo',
-    password: 'so2VJB9nU301wRYEvtw1ocsv2hEZUoON6PQHuT5r5EQ=',
+    username: usr,
+    password: auth,
   };
   return axios;
 }
