@@ -99,4 +99,5 @@ const listNotEmpty = () => orders.length !== 0;
 
 // 'https://itb2204.bc365.eu:7048/bc/api/trackers/tracking/v2.0/companies(c44491e1-219e-ed11-9889-000d3a2a9069)/salesOrders(561d5863-9ad1-ed11-8405-c08ec299d726)/';
 // ?id=561d5863-9ad1-ed11-8405-c08ec299d726&tenant=230195TAF
+// https://white-rock-041c9dd03.3.azurestaticapps.net
 </script>
