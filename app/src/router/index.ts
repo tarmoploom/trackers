@@ -1,21 +1,15 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import ExercisesVue from '@/views/Exercises.vue';
-import AddExerciseVue from '@/views/AddExercise.vue';
+import Mainview from '@/views/Mainview.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Harjutused',
-    component: ExercisesVue,
+    component: Mainview,
     props: (route) => ({
       id: route.query.id,
       tenant: route.query.tenant,
     }),
-  },
-  {
-    path: '/newexercise',
-    name: 'Lisa harjutus',
-    component: AddExerciseVue,
   },
 ];
 

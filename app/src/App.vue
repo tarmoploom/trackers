@@ -15,13 +15,6 @@
                 aria-current="page"
                 >Harjutused</router-link
               >
-
-              <router-link
-                to="/newexercise"
-                class="text-orange-200 hover:bg-orange-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                active-class="bg-orange-500 text-white"
-                >Lisa harjutus</router-link
-              >
             </div>
           </div>
         </div>
