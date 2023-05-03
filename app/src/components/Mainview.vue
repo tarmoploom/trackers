@@ -55,12 +55,15 @@ let url: string;
 
 const Submit = async () => {
   if (
+    router.currentRoute.value.query.compid !== '' &&
     router.currentRoute.value.query.id !== '' &&
     router.currentRoute.value.query.tenant !== ''
   ) {
     url =
       'https://itb2204.bc365.eu:7048/bc/api/trackers/tracking/v2.0/' +
-      'companies(c44491e1-219e-ed11-9889-000d3a2a9069)/salesOrders(' +
+      'companies(' +
+      router.currentRoute.value.query.compid +
+      ')/salesOrders(' +
       router.currentRoute.value.query.id +
       ')/';
     axios.defaults.params = { tenant: router.currentRoute.value.query.tenant };
@@ -97,6 +100,6 @@ const { orders } = useOrdersStore();
 const listNotEmpty = () => orders.length !== 0;
 
 // 'https://itb2204.bc365.eu:7048/bc/api/trackers/tracking/v2.0/companies(c44491e1-219e-ed11-9889-000d3a2a9069)/salesOrders(561d5863-9ad1-ed11-8405-c08ec299d726)/';
-// ?id=561d5863-9ad1-ed11-8405-c08ec299d726&tenant=230195TAF
+// ?compid=c44491e1-219e-ed11-9889-000d3a2a9069&id=71CD3535-4FD6-ED11-8405-C08EC299D726&tenant=trackers
 // https://white-rock-041c9dd03.3.azurestaticapps.net
 </script>

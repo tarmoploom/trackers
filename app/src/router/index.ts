@@ -7,6 +7,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Harjutused',
     component: Mainview,
     props: (route) => ({
+      compid: route.query.compid,
       id: route.query.id,
       tenant: route.query.tenant,
     }),
