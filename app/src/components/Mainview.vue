@@ -38,7 +38,7 @@
 import { Order } from '@/model/order';
 import { useOrdersStore } from '@/stores/ordersStore';
 import { ref, Ref } from 'vue';
-import { useRouter } from 'vue-router';
+import router from '@/router/index';
 import { AxiosCreate } from '@/modules/api';
 
 const order: Ref<Order> = ref({
@@ -49,24 +49,24 @@ const order: Ref<Order> = ref({
   orderStatus: '',
 });
 const { addOrder } = useOrdersStore();
-const router = useRouter();
+const route = router;
 const axios = AxiosCreate();
 let url: string;
 
 const Submit = async () => {
   if (
-    router.currentRoute.value.query.compid !== '' &&
-    router.currentRoute.value.query.id !== '' &&
-    router.currentRoute.value.query.tenant !== ''
+    route.currentRoute.value.query.compid !== '' &&
+    route.currentRoute.value.query.id !== '' &&
+    route.currentRoute.value.query.tenant !== ''
   ) {
     url =
       'https://itb2204.bc365.eu:7048/bc/api/trackers/tracking/v2.0/' +
       'companies(' +
-      router.currentRoute.value.query.compid +
+      route.currentRoute.value.query.compid +
       ')/salesOrders(' +
-      router.currentRoute.value.query.id +
+      route.currentRoute.value.query.id +
       ')/';
-    axios.defaults.params = { tenant: router.currentRoute.value.query.tenant };
+    axios.defaults.params = { tenant: route.currentRoute.value.query.tenant };
 
     await axios
       .get(url)
