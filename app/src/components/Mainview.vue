@@ -35,11 +35,11 @@
 </template>
 
 <script setup lang="ts">
-import { Order } from '@/model/order';
-import { useOrdersStore } from '@/stores/ordersStore';
+import { Order } from '../model/order';
+import { useOrdersStore } from '../stores/ordersStore';
 import { ref, Ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { AxiosCreate } from '@/modules/api';
+import { AxiosCreate } from '../modules/api';
 
 const order: Ref<Order> = ref({
   salesOrderNo: undefined,
@@ -78,9 +78,9 @@ const Submit = async () => {
       .catch(function (error) {
         console.log(error);
       })
-      .finally(function () {
+      /*.finally(function () {
         // always executed
-      });
+      })*/;
   }
 
   addOrder({ ...order.value });
