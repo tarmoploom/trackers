@@ -5,42 +5,40 @@
 <div class="container mt-5 mb-5">
     <div class="row">
         <div class="col-md-6 offset-md-3">
-        
-            <div v-if="listNotEmpty()">
+        <div v-if="listNotEmpty()">
         <h1 class="font-bold">{{ title }}</h1>
-        <DataTable :value="orders">
-          <Column field="salesOrderNo" header="Order No." />
-          <Column field="customerName" header="Name" />
-          <Column field="orderOfDate" header="Order date" />
-          <Column field="shipmentDate" header="Shipment date" />
-          <Column v-show="isTrue" field="orderStatus" header="Order status" />
-        </DataTable>
+        <h7> Order No. {{ orders[0]?.salesOrderNo }} <br/> Customer name: {{ orders[0]?.customerName }}</h7>
+        <br/><br/>
       </div>
         <button
               @click.prevent="Submit"
-              class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               <span class="absolute left-0 inset-y-0 flex items-center pl-3">
               </span>
               Track order
             </button>
-            <ul class="timeline">
+                <ul class="timeline">
                 <li>
-                    <a href="">Open</a>
-                    <a href="" class="float-right">21 March, 2014</a>
-                    <p>Open</p>
+                    <a v-if="orders[0]?.orderStatus=='Ordered'" href="">{{orders[0]?.orderStatus}}</a>
+                    <a href="#" class="float-right">{{orders[0]?.orderOfDate}}</a>
+                    <p v-if="orders[0]?.orderStatus!='Ordered'">Ordered</p>
                 </li>
                 <li>
-                    <a href="">Released</a>
-                    <a href="" class="float-right">4 March, 2014</a>
-                    <p>Released</p>
+                    <a v-if="orders[0]?.orderStatus=='Open'" href="">{{orders[0]?.orderStatus}}</a>
+                    <a href="#" class="float-right"></a>
+                    <p v-if="orders[0]?.orderStatus!='Open'">Open</p>
                 </li>
                 <li>
-                    <a href="">Delivered</a>
-                    <a href="" class="float-right">1 April, 2014</a>
-                    <p>Delivered</p>
+                    <a v-if="orders[0]?.orderStatus=='Released'" href="">{{orders[0]?.orderStatus}}</a>
+                    <a href="#" class="float-right"></a>
+                    <p v-if="orders[0]?.orderStatus!='Released'">Released</p>
                 </li>
-            </ul>
+                <li>
+                    <a v-if="orders[0]?.orderStatus=='Expected shipment'" href="">{{orders[0]?.orderStatus}}</a>
+                    <a href="#" class="float-right">{{ orders[0]?.shipmentDate }}</a>
+                    <p v-if="orders[0]?.orderStatus!='Expected shipment'">Expected shipment</p>
+                </li></ul>
         </div>
     </div>
 </div>
@@ -49,24 +47,10 @@
   
   <!-- <style>
   @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
-  
-  body {
-    font-family: 'Open Sans', Arial;
-    background-image: url(https://user-images.githubusercontent.com/356994/100579048-4e006a80-3298-11eb-8ea0-a7205221f389.gif);
-    background-size: 100%;
-}
   .button1 {
     font-family: 'Open Sans', Arial;
     color: #939292;
     margin-left: 60%;
-  }
-  main {
-    border-radius: 10px;
-    background: rgb(252, 252, 252);
-    width: 700px;
-    margin: 20px auto;
-    padding: 10px 0;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
   }
   h2 {
     text-align: center;
@@ -127,6 +111,19 @@
   </style> -->
 
   <style>
+  main {
+    border-radius: 5px;
+    background: rgb(252, 252, 252);
+    width: 600px;
+    margin: 10px auto;
+    padding: 5px 0;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+  }
+  body {
+    font-family: 'Open Sans', Arial;
+    background-image: url(https://mir-s3-cdn-cf.behance.net/project_modules/1400/70f81163393359.5ab4c75066483.gif);
+    background-size: 50%;
+}
     ul.timeline {
     list-style-type: none;
     position: relative;
@@ -157,7 +154,7 @@ ul.timeline > li:before {
     display: inline-block;
     position: absolute;
     border-radius: 50%;
-    border: 3px solid #22c0e8;
+    border: 3px solid #269bda;
     left: 20px;
     width: 20px;
     height: 20px;
@@ -170,8 +167,6 @@ import { useOrdersStore } from '@/stores/ordersStore';
 import { ref, Ref } from 'vue';
 import router from '@/router/index';
 import { AxiosCreate } from '@/modules/api';
-
-const isTrue="false";
 const order: Ref<Order> = ref({
   salesOrderNo: undefined,
   customerName: '',

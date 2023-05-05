@@ -17,7 +17,7 @@ h4 {
   font-size: 540px;
 }
 #title {
-  margin-left: 33%;
+  margin-left: 28.5%;
   overflow: hidden;
   color: rgb(253, 253, 253);
   mix-blend-mode: difference;
