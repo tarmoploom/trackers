@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Mainview from '@/views/Mainview.vue';
-import Test from '@/views/Testview.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -12,11 +11,6 @@ const routes: Array<RouteRecordRaw> = [
       id: route.query.id,
       tenant: route.query.tenant,
     }),
-  },
-  {
-    path: '/test',
-    name: 'TestName',
-    component: Test,
   },
 ];
 

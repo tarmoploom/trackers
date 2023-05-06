@@ -1,5 +1,5 @@
 <template>
-  <Mainview title="Harjutuste nimekiri" />
+  <Mainview />
 </template>
 
 <script setup lang="ts">
