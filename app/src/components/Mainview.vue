@@ -11,7 +11,7 @@
           <div v-if="listNotEmpty()">
             <h7>
               Order No. {{ orders[0]?.salesOrderNo }} <br />
-              Customer name: {{ orders[0]?.customerName }}</h7
+             {{ orders[0]?.customerName }}</h7
             >
             <br />
             <span>
@@ -63,20 +63,28 @@
                 Expected shipment
               </p>
             </li>
+            <li>
+            <a class="address" href="orders[0]?.shippingWebAddress">Shipping Web Address</a>
+            </li>
           </ul>
         </div>
       </div>
     </div>
-    <button
-            @click.prevent="ToPage"
-          >
-            {{ orders[0]?.shippingWebAddress }}
-          </button>
   </main>
 </template>
 
 
 <style>
+
+.address{
+  text-align: center;
+}
+
+.btn10:hover{
+
+  background: rgb(228, 228, 244);
+background: linear-gradient(0deg, rgb(233, 233, 245) 0%, rgb(222, 225, 228) 100%);
+}
 main {
   border-radius: 5px;
   background: rgb(252, 252, 252, 88%);
@@ -162,9 +170,6 @@ const route = router;
 const axios = AxiosCreate();
 let url: string;
 
-const ToPage = async () => {
-  window.location.href = '' + orders[0]?.shippingWebAddress;
-}
 
 const Submit = async () => {
   if (
