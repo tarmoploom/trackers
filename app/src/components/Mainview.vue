@@ -64,16 +64,29 @@
 <style>
 main {
   border-radius: 5px;
-  background: rgb(252, 252, 252);
-  width: 600px;
+  background: rgb(252, 252, 252, 88%);
+  width: 500px;
   margin: 10px auto;
   padding: 5px 0;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
 }
 body {
   font-family: 'Open Sans', Arial;
-  background-image: url(https://mir-s3-cdn-cf.behance.net/project_modules/1400/70f81163393359.5ab4c75066483.gif);
-  background-size: 50%;
+  background: linear-gradient(-45deg, #e1ae07, #e3ef79, #0a94c7, #5ceac9);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  height: 100vh;
+}
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 ul.timeline {
   list-style-type: none;
