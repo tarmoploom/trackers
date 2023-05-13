@@ -9,51 +9,22 @@
       <div class="row">
         <div class="col-md-6 offset-md-3">
           <div v-if="listNotEmpty()">
-            <h7>
+            <h7 v-if="orders[0]?.salesOrderNo != undefined ">
               Order No. {{ orders[0]?.salesOrderNo }} <br />
              {{ orders[0]?.customerName }}</h7
             >
             <br />
-            <span>
+          <span v-if="orders[0]?.packageTrackingNo.length > 1">
             {{ orders[0]?.shippingAgentCode }}
-          </span><br /><br />
+          <br/> 
+            <a class="address" href="orders[0]?.shippingWebAddress">Shipping Web Address</a>
+          </span>
           </div>
-          <button
-            @click.prevent="Submit"
-            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-            </span>
-            Track order
-          </button>
-          <ul v-show="listNotEmpty()" class="timeline">
-            <li>
-              <a v-if="orders[0]?.orderStatus == 'Ordered'" href="">{{
-                orders[0]?.orderStatus
-              }}</a>
-              <a href="#" class="float-right">{{ orders[0]?.orderOfDate }}</a>
-              <p v-if="orders[0]?.orderStatus != 'Ordered'">Ordered</p>
-            </li>
-            <li>
-              <a v-if="orders[0]?.orderStatus == 'Open'" href="">{{
-                orders[0]?.orderStatus
-              }}</a>
-              <a v-if="orders[0]?.orderStatus == 'Pending Approval'" href="">{{
-                orders[0]?.orderStatus
-              }}</a>
-              <a v-if="orders[0]?.orderStatus == 'Pending Prepayment'" href="">{{
-                orders[0]?.orderStatus
-              }}</a>
-              <a href="#" class="float-right"></a>
-              <p v-if="orders[0]?.orderStatus != 'Open'">Open</p>
-            </li>
-            <li>
-              <a v-if="orders[0]?.orderStatus == 'Released'" href="">{{
-                orders[0]?.orderStatus
-              }}</a>
-              <a href="#" class="float-right"></a>
-              <p v-if="orders[0]?.orderStatus != 'Released'">Released</p>
-            </li>
+          <span v-if="orders[0]?.salesOrderNo == undefined" >
+            Order Tracking Info not exist
+            <br/>
+          </span>        
+          <ul v-show="listNotEmpty()" v-if="orders[0]?.salesOrderNo != undefined" class="timeline">
             <li>
               <a v-if="orders[0]?.orderStatus == 'Expected shipment'" href="">{{
                 orders[0]?.orderStatus
@@ -64,9 +35,42 @@
               </p>
             </li>
             <li>
-            <a class="address" href="orders[0]?.shippingWebAddress">Shipping Web Address</a>
+              <a v-if="orders[0]?.orderStatus == 'Released'" href="">{{
+                orders[0]?.orderStatus
+              }}</a>
+              <a href="#" class="float-right"></a>
+              <p v-if="orders[0]?.orderStatus != 'Released'">Released</p>
             </li>
+            <li>
+              <a v-if="orders[0]?.orderStatus == 'Open'" href="">{{
+                orders[0]?.orderStatus
+              }}</a>
+              <a v-if="orders[0]?.orderStatus == 'Pending Approval'" href="">{{
+                orders[0]?.orderStatus 
+              }}</a>
+              <a v-if="orders[0]?.orderStatus == 'Pending Prepayment'" href="">{{
+                orders[0]?.orderStatus
+              }}</a>
+              <a href="#" class="float-right"></a>
+              <p v-if="orders[0]?.orderStatus != 'Open'">Open</p>
+            </li>
+            <li>
+              <a v-if="orders[0]?.orderStatus == 'Ordered'" href="">{{
+                orders[0]?.orderStatus
+              }}</a>
+              <a href="#" class="float-right">{{ orders[0]?.orderOfDate }}</a>
+              <p v-if="orders[0]?.orderStatus != 'Ordered'">Ordered</p>
+            </li>
+           
           </ul>
+          <button
+            @click.prevent="Submit"
+            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+            </span>
+            Track order
+          </button>
         </div>
       </div>
     </div>
