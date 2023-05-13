@@ -3,5 +3,5 @@
 </template>
 
 <script setup lang="ts">
-import Mainview from '@/components/Mainview.vue';
+import Mainview from '../components/Mainview.vue';
 </script>

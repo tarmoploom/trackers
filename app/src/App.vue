@@ -19,8 +19,8 @@ h4 {
 #title {
   margin-left: 28.5%;
   overflow: hidden;
-  color: rgb(253, 253, 253);
-  mix-blend-mode: difference;
+  color: rgba(76, 122, 159, 0.97);
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.525);
   font-size: 1.8em;
   font-weight: 800;
   letter-spacing: 0.5pt;
