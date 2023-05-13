@@ -5,7 +5,7 @@
       rel="stylesheet"
       id="bootstrap-css"
     />
-    <div class="container mt-5 mb-5">
+    <div class="container mt-4 mb-4">
       <div class="row">
         <div class="col-md-6 offset-md-3">
           <div v-if="listNotEmpty()">
@@ -13,7 +13,10 @@
               Order No. {{ orders[0]?.salesOrderNo }} <br />
               Customer name: {{ orders[0]?.customerName }}</h7
             >
-            <br /><br />
+            <br />
+            <span>
+            {{ orders[0]?.shippingAgentCode }}
+          </span><br /><br />
           </div>
           <button
             @click.prevent="Submit"
@@ -33,6 +36,12 @@
             </li>
             <li>
               <a v-if="orders[0]?.orderStatus == 'Open'" href="">{{
+                orders[0]?.orderStatus
+              }}</a>
+              <a v-if="orders[0]?.orderStatus == 'Pending Approval'" href="">{{
+                orders[0]?.orderStatus
+              }}</a>
+              <a v-if="orders[0]?.orderStatus == 'Pending Prepayment'" href="">{{
                 orders[0]?.orderStatus
               }}</a>
               <a href="#" class="float-right"></a>
@@ -55,17 +64,26 @@
               </p>
             </li>
           </ul>
+          <button
+            @click.prevent="ToPage"
+            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+            </span>
+            Tracking Link
+          </button>
         </div>
       </div>
     </div>
   </main>
 </template>
 
+
 <style>
 main {
   border-radius: 5px;
   background: rgb(252, 252, 252, 88%);
-  width: 500px;
+  width: 560px;
   margin: 10px auto;
   padding: 5px 0;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
@@ -146,6 +164,10 @@ const { addOrder } = useOrdersStore();
 const route = router;
 const axios = AxiosCreate();
 let url: string;
+
+const ToPage = async () => {
+  window.location.href = '' + orders[0]?.shippingWebAddress;
+}
 
 const Submit = async () => {
   if (
