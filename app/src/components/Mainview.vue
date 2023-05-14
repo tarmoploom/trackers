@@ -150,11 +150,7 @@ const order: Ref<Order> = ref({
   shippingWebAddress: '',
 });
 
-<<<<<<< HEAD
 const axios = Axios.create();
-=======
-
->>>>>>> 4716c7578b97e0bf8793a678330f2d179a74b3c1
 const Submit = async () => {
   await axios
     .get(url())
