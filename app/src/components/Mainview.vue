@@ -5,7 +5,7 @@
       rel="stylesheet"
       id="bootstrap-css"
     />
-    <div class="container mt-4 mb-4">
+    <div class="container mt-5 mb-5">
       <div class="row">
         <div class="col-md-6 offset-md-3">
           <h7>
@@ -57,43 +57,18 @@
 </template>
 
 <style>
-.address {
-  text-align: center;
-}
-
-.btn10:hover {
-  background: rgb(228, 228, 244);
-  background: linear-gradient(
-    0deg,
-    rgb(233, 233, 245) 0%,
-    rgb(222, 225, 228) 100%
-  );
-}
 main {
   border-radius: 5px;
-  background: rgb(252, 252, 252, 88%);
-  width: 560px;
+  background: rgb(252, 252, 252);
+  width: 600px;
   margin: 10px auto;
   padding: 5px 0;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
 }
 body {
   font-family: 'Open Sans', Arial;
-  background: linear-gradient(-45deg, #e1ae07, #e3ef79, #0a94c7, #5ceac9);
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
-  height: 100vh;
-}
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  background-image: url(https://mir-s3-cdn-cf.behance.net/project_modules/1400/70f81163393359.5ab4c75066483.gif);
+  background-size: 50%;
 }
 ul.timeline {
   list-style-type: none;
