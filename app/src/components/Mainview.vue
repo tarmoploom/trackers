@@ -149,6 +149,6 @@ const Submit = async () => {
 };
 </script>
 
-<!-- > var 1: /?compid=c44491e1-219e-ed11-9889-000d3a2a9069&tenant=trackers&id=71CD3535-4FD6-ED11-8405-C08EC299D726
-   variant 2: /?compid=c44491e1-219e-ed11-9889-000d3a2a9069&tenant=230195taf&id=F6F58128-30F0-ED11-8407-FC6E82E3F604
+<!-- > v1: /?compid=c44491e1-219e-ed11-9889-000d3a2a9069&tenant=trackers&id=71CD3535-4FD6-ED11-8405-C08EC299D726
+variant 2: /?compid=c44491e1-219e-ed11-9889-000d3a2a9069&tenant=230195taf&id=F6F58128-30F0-ED11-8407-FC6E82E3F604
 -->
