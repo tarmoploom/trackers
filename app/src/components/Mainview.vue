@@ -8,53 +8,48 @@
     <div class="container mt-5 mb-5">
       <div class="row">
         <div class="col-md-6 offset-md-3">
-          <div v-if="listNotEmpty()">
-            <h7>
-              Order No. {{ orders[0]?.salesOrderNo }} <br />
-              Customer name: {{ orders[0]?.customerName }}</h7
-            >
-            <br /><br />
-          </div>
+          <h7>
+            Order No. {{ order?.salesOrderNo }} <br />
+            Customer: {{ order?.customerName }} <br /><br />
+            <a v-if="order?.packageTrackingNo !== ''"
+              >{{ order?.shippingAgentCode }} <br />
+            </a>
+            <a
+              v-if="order?.packageTrackingNo !== ''"
+              :href="order.shippingWebAddress + ''"
+              >Parcel Tracking
+            </a>
+          </h7>
+          <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+          </span>
+          <ul class="timeline">
+            <li>
+              <a href="#" class="float-right">{{ order?.shipmentDate }}</a>
+              <p>Expected shipment</p>
+            </li>
+            <li>
+              <a v-if="order?.orderStatus === 'Released'" href="#">{{
+                order?.orderStatus
+              }}</a>
+              <p v-if="order?.orderStatus !== 'Released'">Released</p>
+            </li>
+            <li>
+              <a v-if="order?.orderStatus === 'Open'" href="#">{{
+                order?.orderStatus
+              }}</a>
+              <p v-if="order?.orderStatus !== 'Open'">Open</p>
+            </li>
+            <li>
+              <a href="#" class="float-right">{{ order?.orderOfDate }}</a>
+              <p>Ordered</p>
+            </li>
+          </ul>
           <button
             @click.prevent="Submit"
             class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-            </span>
             Track order
           </button>
-          <ul v-show="listNotEmpty()" class="timeline">
-            <li>
-              <a v-if="orders[0]?.orderStatus == 'Ordered'" href="">{{
-                orders[0]?.orderStatus
-              }}</a>
-              <a href="#" class="float-right">{{ orders[0]?.orderOfDate }}</a>
-              <p v-if="orders[0]?.orderStatus != 'Ordered'">Ordered</p>
-            </li>
-            <li>
-              <a v-if="orders[0]?.orderStatus == 'Open'" href="">{{
-                orders[0]?.orderStatus
-              }}</a>
-              <a href="#" class="float-right"></a>
-              <p v-if="orders[0]?.orderStatus != 'Open'">Open</p>
-            </li>
-            <li>
-              <a v-if="orders[0]?.orderStatus == 'Released'" href="">{{
-                orders[0]?.orderStatus
-              }}</a>
-              <a href="#" class="float-right"></a>
-              <p v-if="orders[0]?.orderStatus != 'Released'">Released</p>
-            </li>
-            <li>
-              <a v-if="orders[0]?.orderStatus == 'Expected shipment'" href="">{{
-                orders[0]?.orderStatus
-              }}</a>
-              <a href="#" class="float-right">{{ orders[0]?.shipmentDate }}</a>
-              <p v-if="orders[0]?.orderStatus != 'Expected shipment'">
-                Expected shipment
-              </p>
-            </li>
-          </ul>
         </div>
       </div>
     </div>
@@ -115,10 +110,10 @@ ul.timeline > li:before {
 
 <script setup lang="ts">
 import { Order } from '@/model/order';
-import { useOrdersStore } from '@/stores/ordersStore';
+import { url } from '@/modules/url';
 import { ref, Ref } from 'vue';
-import router from '@/router/index';
-import { AxiosCreate } from '@/modules/api';
+import Axios from 'axios';
+
 const order: Ref<Order> = ref({
   salesOrderNo: undefined,
   customerName: '',
@@ -129,61 +124,31 @@ const order: Ref<Order> = ref({
   shippingAgentCode: '',
   shippingWebAddress: '',
 });
-const { addOrder } = useOrdersStore();
-const route = router;
-const axios = AxiosCreate();
-let url: string;
 
+const axios = Axios.create();
 const Submit = async () => {
-  if (
-    route.currentRoute.value.query.compid !== '' &&
-    route.currentRoute.value.query.tenant !== '' &&
-    route.currentRoute.value.query.id !== ''
-  ) {
-    url =
-      'https://itb2204.bc365.eu:7048/bc/api/trackers/tracking/v2.0/' +
-      'companies(' +
-      route.currentRoute.value.query.compid +
-      ')/salesOrders(' +
-      route.currentRoute.value.query.id +
-      ')/';
-    axios.defaults.params = { tenant: route.currentRoute.value.query.tenant };
-
-    await axios
-      .get(url)
-      .then(function (response) {
-        let parsed = JSON.parse(JSON.stringify(response.data));
-        order.value.salesOrderNo = parsed.salesOrderNo;
-        order.value.customerName = parsed.customerName;
-        order.value.orderOfDate = parsed.orderOfDate;
-        order.value.shipmentDate = parsed.shipmentDate;
-        order.value.orderStatus = parsed.orderStatus;
-        order.value.packageTrackingNo = parsed.packageTrackingNo;
-        order.value.shippingAgentCode = parsed.shippingAgentCode;
-        order.value.shippingWebAddress = parsed.shippingWebAddress;
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
-      .finally(function () {
-        // always executed
-      });
-  }
-
-  addOrder({ ...order.value });
-  order.value.salesOrderNo = undefined;
-  order.value.customerName = '';
-  order.value.orderOfDate = undefined;
-  order.value.shipmentDate = undefined;
-  order.value.orderStatus = '';
-  order.value.packageTrackingNo = '';
-  order.value.shippingAgentCode = '';
-  order.value.shippingWebAddress = '';
+  await axios
+    .get(url())
+    .then(function (response) {
+      let parsed = JSON.parse(JSON.stringify(response.data));
+      order.value.salesOrderNo = parsed.salesOrderNo;
+      order.value.customerName = parsed.customerName;
+      order.value.orderOfDate = parsed.orderOfDate;
+      order.value.shipmentDate = parsed.shipmentDate;
+      order.value.orderStatus = parsed.orderStatus;
+      order.value.packageTrackingNo = parsed.packageTrackingNo;
+      order.value.shippingAgentCode = parsed.shippingAgentCode;
+      order.value.shippingWebAddress = parsed.shippingWebAddress;
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+    .finally(function () {
+      // always executed
+    });
 };
-
-const { orders } = useOrdersStore();
-const listNotEmpty = () => orders.length !== 0;
 </script>
 
-<!-- > local host testimisel lisada localhostile -> /?compid=c44491e1-219e-ed11-9889-000d3a2a9069&tenant=trackers&id=71CD3535-4FD6-ED11-8405-C08EC299D726
+<!-- > var 1: /?compid=c44491e1-219e-ed11-9889-000d3a2a9069&tenant=trackers&id=71CD3535-4FD6-ED11-8405-C08EC299D726
+   variant 2: /?compid=c44491e1-219e-ed11-9889-000d3a2a9069&tenant=230195taf&id=F6F58128-30F0-ED11-8407-FC6E82E3F604
 -->
