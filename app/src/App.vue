@@ -13,6 +13,11 @@
 <script setup lang="ts"></script>
 
 <style>
+body {
+  font-family: 'Open Sans', Arial;
+  background-image: url(https://mir-s3-cdn-cf.behance.net/project_modules/1400/70f81163393359.5ab4c75066483.gif);
+  background-size: 50%;
+}
 h4 {
   font-size: 540px;
 }

@@ -19,7 +19,7 @@
             <a v-if="order?.packageTrackingNo !== ''"
               >{{ order?.shippingAgentCode + ':' }} <br />
             </a>
-            <a
+            <a class="parceltrack"
               v-if="order?.packageTrackingNo !== ''"
               :href="order?.shippingWebAddress + ''"
               >Parcel Tracking
@@ -33,12 +33,20 @@
               <p>Expected shipment</p>
             </li>
             <li>
+              <div v-if="order?.orderStatus === 'Released'" class="hh-grayBox">
+                <div class="order-tracking completed">
+                  <div class="is-complete"></div>
+                </div></div>
               <a v-if="order?.orderStatus === 'Released'" href="#">{{
                 order?.orderStatus
               }}</a>
               <p v-if="order?.orderStatus !== 'Released'">Released</p>
             </li>
             <li>
+              <div v-if="order?.orderStatus === 'Pending Approval' || order?.orderStatus === 'Pending Prepayment' || order?.orderStatus === 'Open'" class="hh-grayBox">
+                <div class="order-tracking completed">
+                  <div class="is-complete"></div>
+                </div></div>
               <a v-if="order?.orderStatus === 'Pending Approval'" href="#">{{
                 order?.orderStatus
               }}</a>
@@ -59,7 +67,7 @@
           </ul>
           <button
             @click.prevent="comp.Submit"
-            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            class="group relative w-full flex justify-center py-2 px-4 text-sm font-medium rounded-md text-black hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Track order
           </button>
@@ -69,7 +77,45 @@
   </main>
 </template>
 
-<style>
+<style scoped>
+.parceltrack{
+  color:rgb(60, 113, 154);
+}
+button {
+  border: 2px solid;
+  border-color: #000000;
+  background-color: rgb(69, 129, 176);
+}
+button:hover {
+  background-color: rgb(255, 255, 255);
+}
+a:link {
+  color: rgb(69, 129, 176);
+}
+a:link:hover {
+  color: rgb(35, 36, 38);
+  background-color: transparent;
+  text-decoration: underline;
+}
+.hh-grayBox {
+  margin-left: -27px;
+}
+.order-tracking{
+  position: relative;
+  display: block;
+}
+.order-tracking .is-complete{
+  display: block;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  margin-bottom: -15px;
+}
+.order-tracking.completed .is-complete{
+  background-color: #4f8db4;
+  border-color: #000000;
+  border-width: 2px;
+}
 main {
   border-radius: 5px;
   background: rgb(252, 252, 252);
@@ -77,11 +123,6 @@ main {
   margin: 10px auto;
   padding: 5px 0;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
-}
-body {
-  font-family: 'Open Sans', Arial;
-  background-image: url(https://mir-s3-cdn-cf.behance.net/project_modules/1400/70f81163393359.5ab4c75066483.gif);
-  background-size: 50%;
 }
 ul.timeline {
   list-style-type: none;
@@ -94,13 +135,12 @@ ul.timeline {
 ul.timeline:before {
   margin-left: -10%;
   content: ' ';
-  background: #d4d9df;
+  background: #000000;
   display: inline-block;
   position: absolute;
   left: 29px;
   width: 2px;
   height: 100%;
-  z-index: 400;
 }
 ul.timeline > li {
   margin: 20px 0;
@@ -113,11 +153,10 @@ ul.timeline > li:before {
   display: inline-block;
   position: absolute;
   border-radius: 50%;
-  border: 3px solid #7fb3eb;
+  border: 2px solid #000000;
   left: 20px;
   width: 20px;
   height: 20px;
-  z-index: 400;
 }
 </style>
 
