@@ -39,10 +39,18 @@
               <p v-if="order?.orderStatus !== 'Released'">Released</p>
             </li>
             <li>
-              <a v-if="order?.orderStatus === 'Open'" href="#">{{
+              <a v-if="order?.orderStatus === 'Pending Approval'" href="#">{{
                 order?.orderStatus
               }}</a>
-              <p v-if="order?.orderStatus !== 'Open'">Open</p>
+              <a
+                v-else-if="order?.orderStatus === 'Pending Prepayment'"
+                href="#"
+                >{{ order?.orderStatus }}</a
+              >
+              <a v-else-if="order?.orderStatus === 'Open'" href="#">{{
+                order?.orderStatus
+              }}</a>
+              <a v-else>Open</a>
             </li>
             <li>
               <a href="#" class="float-right">{{ order?.orderOfDate }}</a>
