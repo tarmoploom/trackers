@@ -21,7 +21,7 @@
             </a>
             <a
               v-if="order?.packageTrackingNo !== ''"
-              :href="order.shippingWebAddress + ''"
+              :href="order?.shippingWebAddress + ''"
               >Parcel Tracking
             </a>
           </h7>
@@ -50,7 +50,7 @@
             </li>
           </ul>
           <button
-            @click.prevent="Submit"
+            @click.prevent="comp.Submit"
             class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Track order
@@ -114,46 +114,12 @@ ul.timeline > li:before {
 </style>
 
 <script setup lang="ts">
-import { Order } from '@/model/order';
-import { url } from '@/modules/url';
-import { onMounted, ref, Ref } from 'vue';
-import Axios from 'axios';
+import { components } from '@/modules/api';
+import { onMounted } from 'vue';
 
-const order: Ref<Order> = ref({
-  salesOrderNo: undefined,
-  customerName: '',
-  orderOfDate: undefined,
-  shipmentDate: undefined,
-  orderStatus: '',
-  packageTrackingNo: '',
-  shippingAgentCode: '',
-  shippingWebAddress: '',
-});
-
-const axios = Axios.create();
-const Submit = async () => {
-  await axios
-    .get(url())
-    .then(function (response) {
-      let parsed = JSON.parse(JSON.stringify(response.data));
-      order.value.salesOrderNo = parsed.salesOrderNo;
-      order.value.customerName = parsed.customerName;
-      order.value.orderOfDate = parsed.orderOfDate;
-      order.value.shipmentDate = parsed.shipmentDate;
-      order.value.orderStatus = parsed.orderStatus;
-      order.value.packageTrackingNo = parsed.packageTrackingNo;
-      order.value.shippingAgentCode = parsed.shippingAgentCode;
-      order.value.shippingWebAddress = parsed.shippingWebAddress;
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
-    .finally(function () {
-      // always executed
-    });
-
-  onMounted(Submit);
-};
+let comp = components();
+let order = comp.order.value;
+onMounted(comp.Submit);
 </script>
 
 <!-- > v1: /?compid=c44491e1-219e-ed11-9889-000d3a2a9069&tenant=trackers&id=71CD3535-4FD6-ED11-8405-C08EC299D726
