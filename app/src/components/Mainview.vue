@@ -9,10 +9,15 @@
       <div class="row">
         <div class="col-md-6 offset-md-3">
           <h7>
-            Order No. {{ order?.salesOrderNo }} <br />
-            Customer: {{ order?.customerName }} <br /><br />
+            <a v-if="order?.salesOrderNo !== undefined">
+              Order No. {{ order?.salesOrderNo }} <br
+            /></a>
+            <a v-if="order?.customerName !== ''">
+              Customer: {{ order?.customerName }} <br
+            /></a>
+            <br />
             <a v-if="order?.packageTrackingNo !== ''"
-              >{{ order?.shippingAgentCode }} <br />
+              >{{ order?.shippingAgentCode + ':' }} <br />
             </a>
             <a
               v-if="order?.packageTrackingNo !== ''"
@@ -111,7 +116,7 @@ ul.timeline > li:before {
 <script setup lang="ts">
 import { Order } from '@/model/order';
 import { url } from '@/modules/url';
-import { ref, Ref } from 'vue';
+import { onMounted, ref, Ref } from 'vue';
 import Axios from 'axios';
 
 const order: Ref<Order> = ref({
@@ -146,6 +151,8 @@ const Submit = async () => {
     .finally(function () {
       // always executed
     });
+
+  onMounted(Submit);
 };
 </script>
 
