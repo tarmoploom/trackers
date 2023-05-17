@@ -9,7 +9,7 @@
       <div class="row">
         <div class="col-md-6 offset-md-3">
           <h7>
-            <a v-if="order?.salesOrderNo !== undefined">
+            <a v-if="order?.salesOrderNo !== ''">
               Order No. {{ order?.salesOrderNo }} <br
             /></a>
             <a v-if="order?.customerName !== ''">
@@ -19,7 +19,8 @@
             <a v-if="order?.packageTrackingNo !== ''"
               >{{ order?.shippingAgentCode + ':' }} <br />
             </a>
-            <a class="parceltrack"
+            <a
+              class="parceltrack"
               v-if="order?.packageTrackingNo !== ''"
               :href="order?.shippingWebAddress + ''"
               >Parcel Tracking
@@ -36,17 +37,26 @@
               <div v-if="order?.orderStatus === 'Released'" class="hh-grayBox">
                 <div class="order-tracking completed">
                   <div class="is-complete"></div>
-                </div></div>
+                </div>
+              </div>
               <a v-if="order?.orderStatus === 'Released'" href="#">{{
                 order?.orderStatus
               }}</a>
               <p v-if="order?.orderStatus !== 'Released'">Released</p>
             </li>
             <li>
-              <div v-if="order?.orderStatus === 'Pending Approval' || order?.orderStatus === 'Pending Prepayment' || order?.orderStatus === 'Open'" class="hh-grayBox">
+              <div
+                v-if="
+                  order?.orderStatus === 'Pending Approval' ||
+                  order?.orderStatus === 'Pending Prepayment' ||
+                  order?.orderStatus === 'Open'
+                "
+                class="hh-grayBox"
+              >
                 <div class="order-tracking completed">
                   <div class="is-complete"></div>
-                </div></div>
+                </div>
+              </div>
               <a v-if="order?.orderStatus === 'Pending Approval'" href="#">{{
                 order?.orderStatus
               }}</a>
@@ -78,8 +88,8 @@
 </template>
 
 <style scoped>
-.parceltrack{
-  color:rgb(60, 113, 154);
+.parceltrack {
+  color: rgb(60, 113, 154);
 }
 button {
   border: 2px solid;
@@ -100,18 +110,18 @@ a:link:hover {
 .hh-grayBox {
   margin-left: -27px;
 }
-.order-tracking{
+.order-tracking {
   position: relative;
   display: block;
 }
-.order-tracking .is-complete{
+.order-tracking .is-complete {
   display: block;
   border-radius: 50%;
   height: 20px;
   width: 20px;
   margin-bottom: -15px;
 }
-.order-tracking.completed .is-complete{
+.order-tracking.completed .is-complete {
   background-color: #4f8db4;
   border-color: #000000;
   border-width: 2px;

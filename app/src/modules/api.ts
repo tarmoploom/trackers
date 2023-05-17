@@ -5,7 +5,7 @@ import Axios from 'axios';
 
 export let components = () => {
   const order: Ref<Order> = ref({
-    salesOrderNo: undefined,
+    salesOrderNo: '',
     customerName: '',
     orderOfDate: undefined,
     shipmentDate: undefined,

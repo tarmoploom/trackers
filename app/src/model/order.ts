@@ -1,5 +1,5 @@
 export interface Order {
-  salesOrderNo?: Number;
+  salesOrderNo: String;
   customerName: String;
   orderOfDate?: Date;
   shipmentDate?: Date;
