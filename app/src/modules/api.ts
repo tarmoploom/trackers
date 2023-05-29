@@ -15,14 +15,16 @@ export let components = () => {
     shippingWebAddress: '',
   });
 
-  let url = 'https://trackers-backend.azurewebsites.net/api/record?';
-  const route = router.currentRoute.value.query;
-  if (route.compid !== '' && route.tenant !== '' && route.id !== '') {
-    url += 'compid=' + route.compid + '&tenant=' + route.tenant + '&id=' + route.id;
-  }
-
   const axios = Axios.create();
   const Submit = async () => {
+    let route = router.currentRoute.value.query;
+    let url =
+      'https://trackers-backend.azurewebsites.net/api/record?compid=' +
+      route.compid +
+      '&tenant=' +
+      route.tenant +
+      '&id=' +
+      route.id;
     await axios
       .get(url)
       .then(function (response) {
