@@ -1,33 +1,19 @@
 <template>
   <main>
-    <link
-      href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-      rel="stylesheet"
-      id="bootstrap-css"
-    />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
     <div class="container mt-5 mb-5">
       <div class="row">
         <div class="col-md-6 offset-md-3">
           <h7>
-            <a v-if="order?.salesOrderNo !== ''">
-              Order No. {{ order?.salesOrderNo }} <br
-            /></a>
-            <a v-if="order?.customerName !== ''">
-              Customer: {{ order?.customerName }} <br
-            /></a>
+            <a v-if="order?.salesOrderNo !== ''"> Order No. {{ order?.salesOrderNo }} <br /></a>
+            <a v-if="order?.customerName !== ''"> Customer: {{ order?.customerName }} <br /></a>
             <br />
-            <a v-if="order?.packageTrackingNo !== ''"
-              >{{ order?.shippingAgentCode + ':' }} <br />
-            </a>
-            <a
-              class="parceltrack"
-              v-if="order?.packageTrackingNo !== ''"
-              :href="order?.shippingWebAddress + ''"
+            <a v-if="order?.packageTrackingNo !== ''">{{ order?.shippingAgentCode + ':' }} <br /> </a>
+            <a class="parceltrack" v-if="order?.packageTrackingNo !== ''" :href="order?.shippingWebAddress + ''"
               >Parcel Tracking
             </a>
           </h7>
-          <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-          </span>
+          <span class="absolute left-0 inset-y-0 flex items-center pl-3"> </span>
           <ul class="timeline">
             <li>
               <a href="#" class="float-right">{{ order?.shipmentDate }}</a>
@@ -39,9 +25,7 @@
                   <div class="is-complete"></div>
                 </div>
               </div>
-              <a v-if="order?.orderStatus === 'Released'" href="#">{{
-                order?.orderStatus
-              }}</a>
+              <a v-if="order?.orderStatus === 'Released'" href="#">{{ order?.orderStatus }}</a>
               <p v-if="order?.orderStatus !== 'Released'">Released</p>
             </li>
             <li>
@@ -57,17 +41,9 @@
                   <div class="is-complete"></div>
                 </div>
               </div>
-              <a v-if="order?.orderStatus === 'Pending Approval'" href="#">{{
-                order?.orderStatus
-              }}</a>
-              <a
-                v-else-if="order?.orderStatus === 'Pending Prepayment'"
-                href="#"
-                >{{ order?.orderStatus }}</a
-              >
-              <a v-else-if="order?.orderStatus === 'Open'" href="#">{{
-                order?.orderStatus
-              }}</a>
+              <a v-if="order?.orderStatus === 'Pending Approval'" href="#">{{ order?.orderStatus }}</a>
+              <a v-else-if="order?.orderStatus === 'Pending Prepayment'" href="#">{{ order?.orderStatus }}</a>
+              <a v-else-if="order?.orderStatus === 'Open'" href="#">{{ order?.orderStatus }}</a>
               <a v-else>Open</a>
             </li>
             <li>
@@ -76,6 +52,7 @@
             </li>
           </ul>
           <button
+            type="button"
             @click.prevent="comp.Submit"
             class="group relative w-full flex justify-center py-2 px-4 text-sm font-medium rounded-md text-black hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
@@ -180,5 +157,4 @@ onMounted(comp.Submit);
 </script>
 
 <!-- > v1: /?compid=c44491e1-219e-ed11-9889-000d3a2a9069&tenant=trackers&id=71CD3535-4FD6-ED11-8405-C08EC299D726
-variant 2: /?compid=c44491e1-219e-ed11-9889-000d3a2a9069&tenant=230195taf&id=F6F58128-30F0-ED11-8407-FC6E82E3F604
 -->
