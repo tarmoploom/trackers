@@ -15,8 +15,6 @@
 :: pnpm install vue-router \
 :: pnpm install pinia \
 :: pnpm install axios \
-:: pnpm install primevue \
-:: pnpm install primeicons \
 :: pnpm i -D vite-plugin-windicss windicss \
 :: restart VSCode \
 \
