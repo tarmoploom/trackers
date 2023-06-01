@@ -8,7 +8,3 @@ export interface Order {
   shippingAgentCode: String;
   shippingWebAddress: String;
 }
-
-export interface State {
-  orders: Order[];
-}
