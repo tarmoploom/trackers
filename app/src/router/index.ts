@@ -4,13 +4,8 @@ import Mainview from '@/views/Mainview.vue';
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'Harjutused',
+    name: 'Mainview',
     component: Mainview,
-    props: (route) => ({
-      compid: route.query.compid,
-      tenant: route.query.tenant,
-      id: route.query.id,
-    }),
   },
 ];
 

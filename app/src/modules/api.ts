@@ -20,7 +20,7 @@ export let components = () => {
     axios.defaults.headers.common.Accept = 'application/json';
     axios.defaults.headers.common['Content-Type'] = 'application/json';
     axios.defaults.timeout = 15000;
-    axios.defaults.timeoutErrorMessage = 'Refresh page, request timed-out: 15(s) ~possible r.: Backend sleep-mode';
+    axios.defaults.timeoutErrorMessage = 'Request timed-out: 15(s) ~possible r.: Backend sleep-mode';
 
     let url = 'https://trackers-backend.azurewebsites.net/api/record';
     let route = router.currentRoute.value.query;
