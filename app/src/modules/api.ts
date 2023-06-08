@@ -21,13 +21,10 @@ export let components = () => {
     axios.defaults.headers.common['Content-Type'] = 'application/json';
     axios.defaults.timeout = 15000;
     axios.defaults.timeoutErrorMessage = 'Request timed-out: 15(s) ~possible r.: Backend sleep-mode';
-
-    let url = 'https://trackers-backend.azurewebsites.net/api/record';
-    let route = router.currentRoute.value.query;
-    axios.defaults.params = { compid: route.compid, tenant: route.tenant, id: route.id };
+    axios.defaults.params = router.currentRoute.value.query;
 
     await axios
-      .get(url)
+      .get('https://trackers-backend.azurewebsites.net/api/record')
       .then(function (response) {
         let parsed = JSON.parse(JSON.stringify(response.data));
         order.value.salesOrderNo = parsed.salesOrderNo;
